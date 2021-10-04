@@ -15,17 +15,17 @@ export const Container = styled.div`
     
     h1 {
       font-size: 2.5rem;
-      color: #FFF;
+      color: var(--gray-100);
       margin-right: 1rem;
       
       span {
         font-size: 4rem;
-        color: yellow;
+        color: var(--yellow-500);
       }
     }
 
     &:hover svg {
-      fill: yellow
+      fill: var(--yellow-500);
     }
   }
 
@@ -34,7 +34,7 @@ export const Container = styled.div`
     align-items: center;  
 
     &:hover svg {
-      fill: yellow
+      fill: var(--yellow-500);
     }
   }
 `
