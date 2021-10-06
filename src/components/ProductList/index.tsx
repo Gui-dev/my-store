@@ -1,5 +1,7 @@
 import { RiShoppingCartLine } from 'react-icons/ri'
 
+import { useCart } from '../../hooks/useCart'
+
 import { Container } from './style'
 
 type ProductListProps = {
@@ -14,6 +16,12 @@ type ProductListProps = {
 }
 
 export const ProductList = ({ product }: ProductListProps) => {
+  const { addProduct } = useCart()
+
+  const handleAddProductToCart = (productId: string) => {
+    addProduct(productId)
+  }
+
   return (
     <Container>
       <article>
@@ -24,7 +32,7 @@ export const ProductList = ({ product }: ProductListProps) => {
           <strong>{ product.price }</strong>
         </div>
 
-        <button>
+        <button onClick={ () => handleAddProductToCart(product.id) }>
           <RiShoppingCartLine size={24} color="#FFF"/>
           <span>Add to Cart</span>
         </button>
