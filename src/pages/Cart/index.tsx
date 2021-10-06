@@ -2,7 +2,7 @@ import { FiTrash } from 'react-icons/fi'
 import { useCart } from '../../hooks/useCart'
 import { formattedPrice } from '../../utils/formattedPrice'
 
-import { Actions, Container, Finish, Info, Table, Total } from './style'
+import { Actions, Container, Info, Table } from './style'
 
 export const Cart = () => {
   const { cart, removeProduct, updateProductAmount } = useCart()
@@ -10,7 +10,7 @@ export const Cart = () => {
     return {
       ...product,
       formattedPrice: formattedPrice(Number(product.price)),
-      subtotal: Number(product.price) * Number(product.amount)
+      subtotal: formattedPrice(Number(product.price) * Number(product.amount))
     }
   })
 
@@ -47,40 +47,44 @@ export const Cart = () => {
           { products.length > 0
             ? products.map(product => {
               return (
+
                 <tr key={ String(product.id) }>
                   <td>
-
                     <img src={ product.image } alt={ product.name } />
+                  </td>
+                  <td>
                     <Info>
                       <h1>{ product.name }</h1>
                       <strong>{ product.formattedPrice }</strong>
-
-                      <Actions>
-                        <button
-                          onClick={
-                            () => handleDecrementProductAmount(product.id, product.amount)
-                          }
-                        >
-                          -
-                        </button>
-                        <input type="text" readOnly value={ product.amount }/>
-                        <button
-                          onClick={
-                            () => handleIncrementProductAmount(product.id, product.amount)
-                          }
-                        >
-                          +
-                        </button>
-
-                        <button
-                          className="trash"
-                          onClick={ () => handleRemoveProductCart(product.id) }
-                        >
-                          <FiTrash size={24} color="red"/>
-                        </button>
-                      </Actions>
-
+                      <strong>Subtotal: { product.subtotal }</strong>
                     </Info>
+                  </td>
+                  <td>
+                    <Actions>
+                      <button
+                        onClick={
+                          () => handleDecrementProductAmount(product.id, product.amount)
+                        }
+                      >
+                        -
+                      </button>
+                      <input type="text" readOnly value={ product.amount }/>
+                      <button
+                        onClick={
+                          () => handleIncrementProductAmount(product.id, product.amount)
+                        }
+                      >
+                        +
+                      </button>
+                    </Actions>
+                  </td>
+                  <td>
+                    <button
+                      className="trash"
+                      onClick={ () => handleRemoveProductCart(product.id) }
+                    >
+                      <FiTrash size={24} color="red"/>
+                    </button>
                   </td>
                 </tr>
               )
@@ -94,24 +98,24 @@ export const Cart = () => {
               )
           }
 
-          <tr>
-            <td>
-              <Total>
-                <span>Total</span>
-                <strong>{ total }</strong>
-              </Total>
-            </td>
-          </tr>
+          { products.length > 0 && (
+            <>
+              <tr className="total">
+                <td>
+                  <span>Total</span>
+                  <strong>{ total }</strong>
+                </td>
+              </tr>
 
-          <tr>
-            <td>
-              <Finish>
-                <button>
-                  <span>Checkout</span>
-                </button>
-              </Finish>
-            </td>
-          </tr>
+              <tr className="finish">
+                <td>
+                  <button>
+                    <span>Checkout</span>
+                  </button>
+                </td>
+              </tr>
+            </>
+          ) }
 
         </tbody>
       </Table>

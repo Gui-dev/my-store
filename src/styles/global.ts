@@ -22,4 +22,8 @@ export const GlobalStyle = createGlobalStyle`
     color: var(--gray-100);
     background-color: var(--gray-900);
   }
+
+  button {
+    cursor: pointer
+  }
 `
