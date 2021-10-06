@@ -5,7 +5,7 @@ export const Container = styled.article`
   min-height: 4rem;
   margin-bottom: 2rem;
   padding: 1.5rem;
-  background-color: var(--gray-600);
+  background-color: var(--gray-800);
   border-radius: .3rem;
 
   @media (min-width: 768px) {
@@ -24,12 +24,12 @@ export const Container = styled.article`
 
     h1 {
       font-size: 1.6rem;
-      color: var(--gray-900);
+      color: var(--gray-100);
     }
 
     strong {
       font-size: 2rem;
-      color: var(--gray-900);
+      color: var(--gray-100);
     }
   }
 

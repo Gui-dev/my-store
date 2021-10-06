@@ -77,7 +77,7 @@ export const Table = styled.table`
         strong {
           font-size: 2.5rem;
           font-weight: bold;
-          color: var(--white);
+          color: var(--green-500);
         }
       }   
     }
@@ -143,6 +143,7 @@ export const Info = styled.div`
     display: block;
     font-size: 2rem;
     font-weight: bold; 
+    color: var(--white);
     margin-top: 1rem;
   }
 `
