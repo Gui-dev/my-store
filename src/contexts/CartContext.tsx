@@ -102,7 +102,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
       setCart(updatedCart)
       localStorage.setItem('mycart:cart', JSON.stringify(updatedCart))
     } catch (error) {
-      console.log(error)
+      toast.error('Erro ao atualizar a Quantidade')
     }
   }
 
