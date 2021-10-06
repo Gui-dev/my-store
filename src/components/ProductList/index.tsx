@@ -24,20 +24,17 @@ export const ProductList = ({ product }: ProductListProps) => {
 
   return (
     <Container>
-      <article>
-        <img src={ product.image } alt={ product.name } />
+      <img src={ product.image } alt={ product.name } />
 
-        <div>
-          <h1> { product.name } </h1>
-          <strong>{ product.price }</strong>
-        </div>
+      <div>
+        <h1> { product.name } </h1>
+        <strong>{ product.price }</strong>
+      </div>
 
-        <button onClick={ () => handleAddProductToCart(product.id) }>
-          <RiShoppingCartLine size={24} color="#FFF"/>
-          <span>Add to Cart</span>
-        </button>
-      </article>
-
+      <button onClick={ () => handleAddProductToCart(product.id) }>
+        <RiShoppingCartLine size={24} color="#FFF"/>
+        <span>Add to Cart</span>
+      </button>
     </Container>
   )
 }
