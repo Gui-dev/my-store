@@ -1,4 +1,6 @@
 import { createContext, ReactNode, useState } from 'react'
+import { toast } from 'react-toastify'
+
 import { api } from '../services/api'
 
 type Product = {
@@ -44,6 +46,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
 
         setCart([...cart, { ...data, amount: 1 }])
         localStorage.setItem('mycart:cart', JSON.stringify([...cart]))
+        toast.success('Produto adicionado no carrinho')
         return
       }
 
@@ -57,8 +60,9 @@ export const CartProvider = ({ children }: CartProviderProps) => {
 
       setCart(updatedCart)
       localStorage.setItem('mycart:cart', JSON.stringify(updatedCart))
+      toast.success('Quantidade atualiza no carrinho')
     } catch (error) {
-      console.log(error)
+      toast.error('Não foi possível adicionar esse produto')
     }
   }
 
@@ -67,8 +71,9 @@ export const CartProvider = ({ children }: CartProviderProps) => {
       const updatedCart = cart.filter(cartItem => cartItem.id !== productId)
       setCart(updatedCart)
       localStorage.setItem('mycart:cart', JSON.stringify(updatedCart))
+      toast.success('Produto removido no carrinho')
     } catch (error) {
-      console.log(error)
+      toast.error('Erro ao tentar remover produto')
     }
   }
 
@@ -78,12 +83,13 @@ export const CartProvider = ({ children }: CartProviderProps) => {
       const productInStock = Number(product?.stock)
 
       if (amount < 1) {
-        console.log('Amount')
+        toast.warn('Quantidade não pode ser menor que 1')
         return
       }
 
       if (amount > productInStock) {
-        console.log('Stock')
+        toast.warn('Quantidade maior que temos em estoque, desculpe')
+        return
       }
 
       const updatedCart = cart.map(cartItem => cartItem.id === productId
