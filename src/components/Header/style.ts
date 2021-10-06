@@ -30,8 +30,25 @@ export const Container = styled.div`
   }
 
   .cart {
+    position: relative;
     display: flex;
     align-items: center;  
+
+    > div {
+      position: absolute;
+      top: -1.8rem;
+      right: -1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: var(--white);
+      padding: 1rem;
+      height: 1rem;
+      width: 1rem;
+      background-color: var(--green-500);
+      border-radius: 50%;
+    }
 
     &:hover svg {
       fill: var(--yellow-500);
