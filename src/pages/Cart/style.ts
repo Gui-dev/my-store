@@ -29,6 +29,11 @@ export const Table = styled.table`
         }
       }
     }
+
+    .emptyCart {
+      font-size: 2rem;
+      text-align: center;
+    }
   }
 
 `

@@ -1,15 +1,36 @@
 import { FiTrash } from 'react-icons/fi'
+import { useCart } from '../../hooks/useCart'
+import { formattedPrice } from '../../utils/formattedPrice'
 
 import { Actions, Container, Finish, Info, Table, Total } from './style'
 
 export const Cart = () => {
-  const product = {
-    id: '2',
-    createdAt: '2019-09-02T07:59:58.181Z',
-    name: 'Sleek Wooden Soap',
-    price: '430.00',
-    image: 'http://lorempixel.com/640/480/transport',
-    stock: 91260
+  const { cart, removeProduct, updateProductAmount } = useCart()
+  const products = cart.map(product => {
+    return {
+      ...product,
+      formattedPrice: formattedPrice(Number(product.price)),
+      subtotal: Number(product.price) * Number(product.amount)
+    }
+  })
+
+  const total = formattedPrice(
+    products.reduce((sumTotal, product) => {
+      sumTotal += Number(product.price) * Number(product.amount)
+
+      return sumTotal
+    }, 0)
+  )
+  const handleIncrementProductAmount = async (productId: string, amount: number) => {
+    updateProductAmount(productId, amount + 1)
+  }
+
+  const handleDecrementProductAmount = async (productId: string, amount: number) => {
+    updateProductAmount(productId, amount - 1)
+  }
+
+  const handleRemoveProductCart = async (productId: string) => {
+    await removeProduct(productId)
   }
 
   return (
@@ -22,33 +43,62 @@ export const Cart = () => {
         </thead>
 
         <tbody>
-          <tr>
-            <td>
 
-              <img src={ product.image } alt={ product.name } />
-              <Info>
-                <h1>{ product.name }</h1>
-                <strong>{ product.price }</strong>
+          { products.length > 0
+            ? products.map(product => {
+              return (
+                <tr key={ String(product.id) }>
+                  <td>
 
-                <Actions>
-                  <button>-</button>
-                  <input type="text" value="2" min="1"/>
-                  <button>+</button>
+                    <img src={ product.image } alt={ product.name } />
+                    <Info>
+                      <h1>{ product.name }</h1>
+                      <strong>{ product.formattedPrice }</strong>
 
-                  <button className="trash">
-                    <FiTrash size={24} color="red"/>
-                  </button>
-                </Actions>
+                      <Actions>
+                        <button
+                          onClick={
+                            () => handleDecrementProductAmount(product.id, product.amount)
+                          }
+                        >
+                          -
+                        </button>
+                        <input type="text" readOnly value={ product.amount }/>
+                        <button
+                          onClick={
+                            () => handleIncrementProductAmount(product.id, product.amount)
+                          }
+                        >
+                          +
+                        </button>
 
-              </Info>
-            </td>
-          </tr>
+                        <button
+                          className="trash"
+                          onClick={ () => handleRemoveProductCart(product.id) }
+                        >
+                          <FiTrash size={24} color="red"/>
+                        </button>
+                      </Actions>
+
+                    </Info>
+                  </td>
+                </tr>
+              )
+            })
+            : (
+              <tr>
+                <td>
+                  <p className="emptyCart">Você ainda não possui produtos no seu carrinho</p>
+                </td>
+              </tr>
+              )
+          }
 
           <tr>
             <td>
               <Total>
                 <span>Total</span>
-                <strong>860.00</strong>
+                <strong>{ total }</strong>
               </Total>
             </td>
           </tr>
