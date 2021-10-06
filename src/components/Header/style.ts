@@ -8,6 +8,16 @@ export const Container = styled.div`
   margin: 0 10%;
   margin-top: 2rem;
 
+  @media (min-width: 768px) {
+    margin: 0 15%;
+    margin-top: 2rem;
+  }
+
+  @media (min-width: 1024px) {
+    margin: 0 20%;
+    margin-top: 2rem;
+  }
+
   .home {
     display: flex;
     align-items: center;        
