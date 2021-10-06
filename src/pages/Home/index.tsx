@@ -29,7 +29,10 @@ export const Home = () => {
     <Container>
       { products.slice(0, 3).map(product => {
         return (
-          <ProductList key={ String(product.id) } product={ product }/>
+          <ProductList
+            key={ String(product.id) }
+            product={ product }
+          />
         )
       }) }
     </Container>
