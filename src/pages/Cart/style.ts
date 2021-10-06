@@ -4,6 +4,14 @@ import { lighten } from 'polished'
 export const Container = styled.div`
   display: flex;
   margin: 3rem 10%;
+
+  @media (min-width: 768px) {
+    margin: 3rem 15%;
+  }
+
+  @media (min-width: 1024px) {
+    margin: 3rem 20%;
+  }
 `
 
 export const Table = styled.table`
