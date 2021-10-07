@@ -19,6 +19,7 @@
     "build": "react-scripts build",
     "eject": "react-scripts eject",
     "test": "jest",
+    "test:watch": "yarn test --watch",
     "lint": "eslint './src/**/*' --max-warnings=0",
     "lint:fix": "yarn lint --fix",
     "lint-staged": "lint-staged",
@@ -26,7 +27,8 @@
   },
   "lint-staged": {
     "src/**/*": [
-      "yarn lint:fix"
+      "yarn lint:fix",
+      "yarn test --findRelatedTests --bail"
     ]
   },
   "eslintConfig": {
