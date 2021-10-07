@@ -1,3 +1,4 @@
+import React from 'react'
 import { FiTrash } from 'react-icons/fi'
 import { useCart } from '../../hooks/useCart'
 import { formattedPrice } from '../../utils/formattedPrice'
