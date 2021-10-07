@@ -1,3 +1,4 @@
+import React from 'react'
 import { Link } from 'react-router-dom'
 import { RiShoppingCartLine, RiStore3Line } from 'react-icons/ri'
 
@@ -15,7 +16,7 @@ export const Header = () => {
 
       <Link to="/cart" className="cart">
 
-        { cart.length > 0 && (
+        { cart?.length > 0 && (
           <div>{ cart.length }</div>
         ) }
 
