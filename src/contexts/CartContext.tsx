@@ -1,4 +1,4 @@
-import React, { createContext, ReactNode, useState } from 'react'
+import React, { createContext, ReactNode, useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 
 import { api } from '../services/api'
@@ -27,15 +27,15 @@ type CartProviderProps = {
 export const CartContext = createContext({} as CartContextProps)
 
 export const CartProvider = ({ children }: CartProviderProps) => {
-  const [cart, setCart] = useState<Product[]>(() => {
+  const [cart, setCart] = useState<Product[]>([])
+
+  useEffect(() => {
     const storagedCart = localStorage.getItem('mycart:cart')
 
     if (storagedCart) {
-      return JSON.parse(storagedCart)
+      return setCart(JSON.parse(storagedCart))
     }
-
-    return []
-  })
+  }, [])
 
   const addProduct = async (productId: string): Promise<void> => {
     try {
@@ -71,7 +71,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
       const updatedCart = cart.filter(cartItem => cartItem.id !== productId)
       setCart(updatedCart)
       localStorage.setItem('mycart:cart', JSON.stringify(updatedCart))
-      toast.success('Produto removido no carrinho')
+      toast.success('Produto removido do carrinho')
     } catch (error) {
       toast.error('Erro ao tentar remover produto')
     }
