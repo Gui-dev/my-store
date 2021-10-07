@@ -36,12 +36,6 @@ export const Cart = () => {
   return (
     <Container>
       <Table>
-        <thead>
-          <tr>
-            <th></th>
-          </tr>
-        </thead>
-
         <tbody>
 
           { products.length > 0

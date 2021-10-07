@@ -19,7 +19,8 @@ export const Container = styled.article`
   > div {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    flex-direction: column;
     margin-top: 1.5rem;
 
     h1 {
@@ -30,6 +31,7 @@ export const Container = styled.article`
     strong {
       font-size: 2rem;
       color: var(--gray-100);
+      margin-top: 1rem;
     }
   }
 
