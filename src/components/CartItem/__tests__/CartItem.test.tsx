@@ -41,9 +41,15 @@ describe('<CartItem />', () => {
     expect(screen.getByText(/subtotal: r\$ 430,00/i)).toBeInTheDocument()
   })
 
-  it('should have button delete', () => {
+  it('should have a delete button', () => {
     screen.getByRole('button', {
       name: /deletar item/i
+    })
+  })
+
+  it('should have a checkout button', () => {
+    screen.getByRole('button', {
+      name: /checkout/i
     })
   })
 })
