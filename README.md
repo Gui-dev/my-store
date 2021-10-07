@@ -3,7 +3,7 @@
 Uma loja simples em React utilizando Typescript, com um catálogo de produtos e um carrinho de compras. Você pode adicionar/remover produtos do catálogo no carrinho de compras
 </p>
 
-![Home](./screens/screen.png) 
+![Home](./screens/home.png) 
 ![Cart](./screens/cart.png) 
 
 
