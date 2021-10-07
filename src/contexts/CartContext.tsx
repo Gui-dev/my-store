@@ -18,6 +18,7 @@ type CartContextProps = {
   addProduct: (productId: string) => Promise<void>
   removeProduct: (productId: string) => Promise<void>
   updateProductAmount: (productId: string, amount: number) => Promise<void>
+  removeCart: () => Promise<void>
 }
 
 type CartProviderProps = {
@@ -106,12 +107,18 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     }
   }
 
+  const removeCart = async (): Promise<void> => {
+    localStorage.removeItem('mycart:cart')
+    setCart([])
+  }
+
   return (
     <CartContext.Provider value={{
       cart,
       addProduct,
       removeProduct,
-      updateProductAmount
+      updateProductAmount,
+      removeCart
     }}>
       { children }
     </CartContext.Provider>

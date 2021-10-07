@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import { useCart } from '../../hooks/useCart'
 import { formattedPrice } from '../../utils/formattedPrice'
 import Modal from 'react-modal'
@@ -9,7 +10,9 @@ import { Container } from './style'
 
 export const Cart = () => {
   const [modalIsOpen, setIsOpen] = useState(false)
-  const { cart, removeProduct, updateProductAmount } = useCart()
+  const { push } = useHistory()
+
+  const { cart, removeProduct, updateProductAmount, removeCart } = useCart()
   const products = cart?.map(product => {
     return {
       ...product,
@@ -45,6 +48,11 @@ export const Cart = () => {
     setIsOpen(false)
   }
 
+  const checkout = async () => {
+    await removeCart()
+    push('/')
+  }
+
   return (
     <Container>
 
@@ -57,7 +65,7 @@ export const Cart = () => {
         <h1>Parebéns pela compra</h1>
         <p>Volte Sempre</p>
 
-        <button>Finalizar</button>
+        <button onClick={ checkout }>Finalizar</button>
       </Modal>
 
      <CartItem
