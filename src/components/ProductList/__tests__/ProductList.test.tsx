@@ -25,4 +25,9 @@ describe('<ProductList />', () => {
       name: /rustic metal fish/i
     })).toBeInTheDocument()
   })
+
+  it('add product to cart', () => {
+    render(<ProductList product={product}/>)
+    expect(screen.getByRole('button', { name: /add to cart/i })).toBeInTheDocument()
+  })
 })
