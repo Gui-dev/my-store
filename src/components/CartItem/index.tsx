@@ -21,6 +21,7 @@ type CartItemProps = {
   onHandleIncrementProductAmount: (productId: string, amount: number) => Promise<void>
   onHandleDecrementProductAmount: (productId: string, amount: number) => Promise<void>
   onHandleRemoveProductCart: (productId: string) => Promise<void>
+  onOpenModal?: () => void
 }
 
 export const CartItem = ({
@@ -28,7 +29,8 @@ export const CartItem = ({
   total,
   onHandleDecrementProductAmount,
   onHandleIncrementProductAmount,
-  onHandleRemoveProductCart
+  onHandleRemoveProductCart,
+  onOpenModal
 }: CartItemProps) => {
   return (
     <Table>
@@ -100,7 +102,7 @@ export const CartItem = ({
 
               <tr className="finish">
                 <td>
-                  <button>
+                  <button onClick={ onOpenModal }>
                     <span>Checkout</span>
                   </button>
                 </td>
