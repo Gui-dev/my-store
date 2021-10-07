@@ -24,7 +24,7 @@ const onHandleDecrementProductAmount = jest.fn()
 const onHandleRemoveProductCart = jest.fn()
 
 describe('<CartItem />', () => {
-  it('should be render correctly', () => {
+  beforeEach(() => {
     render(<CartItem
       products={ products }
       total={ total }
@@ -32,7 +32,12 @@ describe('<CartItem />', () => {
       onHandleIncrementProductAmount={() => onHandleDecrementProductAmount(products[0].id, products[0].amount)}
       onHandleRemoveProductCart={() => onHandleRemoveProductCart(products[0].id)}
     />)
-
+  })
+  it('should be render correctly', () => {
     expect(screen.getByRole('heading', { name: /rustic metal fish/i })).toBeInTheDocument()
+  })
+
+  it('should have subtotal', () => {
+    expect(screen.getByText(/subtotal: r\$ 430,00/i)).toBeInTheDocument()
   })
 })
