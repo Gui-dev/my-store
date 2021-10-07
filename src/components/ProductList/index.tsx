@@ -12,6 +12,7 @@ type ProductListProps = {
     price: string
     image: string
     stock: number
+    formattedPrice?: number
   }
 }
 
@@ -28,7 +29,7 @@ export const ProductList = ({ product }: ProductListProps) => {
 
       <div>
         <h1> { product.name } </h1>
-        <strong>{ product.price }</strong>
+        <strong>{ product.formattedPrice }</strong>
       </div>
 
       <button onClick={ () => handleAddProductToCart(product.id) }>

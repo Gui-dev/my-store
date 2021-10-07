@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { api } from '../../services/api'
 
 import { ProductList } from '../../components/ProductList'
+import { formattedPrice } from '../../utils/formattedPrice'
 import { Container } from './style'
 
 type Product = {
@@ -18,9 +19,14 @@ export const Home = () => {
   const [products, setProducts] = useState<Product[]>([])
 
   useEffect(() => {
-    api.get('/product')
+    api.get<Product[]>('/product')
       .then(response => {
-        const result = response.data
+        const result = response.data.map(product => {
+          return {
+            ...product,
+            formattedPrice: formattedPrice(Number(product.price))
+          }
+        })
         setProducts(result)
       })
   }, [])
