@@ -10,4 +10,12 @@ describe('<Header />', () => {
 
     expect(screen.getByText('MyStore')).toBeInTheDocument()
   })
+
+  it('should have a link', () => {
+    render(<BrowserRouter><Header /></BrowserRouter>)
+
+    expect(screen.getByRole('link', {
+      name: /mystore \./i
+    })).toBeInTheDocument()
+  })
 })
