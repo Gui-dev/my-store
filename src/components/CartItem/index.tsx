@@ -71,6 +71,7 @@ export const CartItem = ({
                   <td>
                     <button
                       className="trash"
+                      title="Deletar item"
                       onClick={ () => onHandleRemoveProductCart(product.id) }
                     >
                       <FiTrash size={24} color="red"/>
